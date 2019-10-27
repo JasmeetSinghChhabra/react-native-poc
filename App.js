@@ -3,7 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  ScrollView,
+  FlatList,
   Button,
   TextInput
 } from "react-native";
@@ -18,7 +18,10 @@ export default function App() {
   };
   const addGoalHandler = () => {
     console.log(enteredGoal);
-    setCourseGoals(currentGoals => [...currentGoals, enteredGoal]); //spread operator
+    setCourseGoals(currentGoals => [
+      ...currentGoals,
+      { key: Math.random().toString(), value: enteredGoal }
+    ]); //spread operator
   };
 
   return (
@@ -39,7 +42,7 @@ export default function App() {
             color: "red",
             //borderBottomColor: "black",
             borderWidth: 2,
-            borderColor: "red",
+            borderColor: "gold",
             padding: 10
           }}
           placeholder="Checking Fucntionality"
@@ -49,13 +52,15 @@ export default function App() {
         <Button title="Add" onPress={addGoalHandler} />
       </View>
       <View>
-        <ScrollView>
-          {courseGoals.map(goal => (
-            <View key={goal} style={styles.listItem}>
-              <Text>{goal}</Text>
+        <FlatList
+          keyExtractor={(item, index) => item.id}
+          data={courseGoals}
+          renderItem={itemData => (
+            <View style={styles.listItem}>
+              <Text>{itemData.item.value}</Text>
             </View>
-          ))}
-        </ScrollView>
+          )}
+        />
       </View>
     </View>
   );
@@ -65,7 +70,8 @@ const styles = StyleSheet.create({
   container: {
     padding: 60,
     flex: 1,
-    backgroundColor: "grey"
+    backgroundColor: "grey",
+    color: "pink"
     //alignItems: "center",
     // justifyContent: "center"
   },
@@ -75,6 +81,7 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderWidth: 1,
     marginVertical: 10,
-    margin: 10
+    margin: 10,
+    color: "pink"
   }
 });
