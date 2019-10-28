@@ -13,6 +13,7 @@ import GoalInput from "./components/GoalInput";
 export default function App() {
   const [outputText, setoutputText] = useState("Yo Bitches");
   const [courseGoals, setCourseGoals] = useState([]);
+  const [isAddMode, setIsAddMode] = useState(false);
 
   const addGoalHandler = goalTitle => {
     //console.log(enteredGoal);
@@ -20,6 +21,12 @@ export default function App() {
       ...currentGoals,
       { id: Math.random().toString(), value: goalTitle }
     ]); //spread operator
+    setIsAddMode(false);
+  };
+  const removeGoalHandler = goalId => {
+    setCourseGoals(currentGoals => {
+      return currentGoals.filter(goal => goal.id !== goalId);
+    });
   };
 
   return (
@@ -27,14 +34,17 @@ export default function App() {
       <Text>{outputText}</Text>
       <Button title="Click Me" onPress={() => setoutputText("Oh Yes")} />
 
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button title="Add new goal" onPress={()=> setIsAddMode(true)}/>
+
+      <GoalInput visible={isAddMode} onAddGoal={addGoalHandler} />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={courseGoals}
         renderItem={itemData => (
           <GoalItem
-            onDelete={() => console.log('Does that work?')}
-            title={itemData.item.value }
+            id={itemData.item.id}
+            onDelete={removeGoalHandler}
+            title={itemData.item.value}
           />
         )}
       />
@@ -47,8 +57,8 @@ const styles = StyleSheet.create({
     padding: 60,
     flex: 1,
     backgroundColor: "grey",
-    color: "pink"
-    //alignItems: "center",
-    // justifyContent: "center"
+    color: "pink",
+    alignItems: "center",
+    justifyContent: "center"
   }
 });

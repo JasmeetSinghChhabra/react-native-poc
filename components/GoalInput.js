@@ -5,7 +5,8 @@ import {
   View,
   FlatList,
   Button,
-  TextInput
+  TextInput,
+  Modal
 } from "react-native";
 
 const GoalInput = props => {
@@ -14,39 +15,36 @@ const GoalInput = props => {
     setEnteredGoal(input);
   };
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-evenly",
-        alignItems: "center"
-      }}
-    >
-      <TextInput
-        style={{
-          width: "80%",
-          color: "red",
-          //borderBottomColor: "black",
-          borderWidth: 2,
-          borderColor: "gold",
-          padding: 10
-        }}
-        placeholder="Checking Fucntionality"
-        onChangeText={goalInputHandler}
-        value={enteredGoal}
-      />
-      <Button title="Add" onPress={()=>props.onAddGoal(enteredGoal)} />
-    </View>
+    <Modal visible={props.visible} animationType={"slide"}>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Checking Fucntionality"
+          onChangeText={goalInputHandler}
+          value={enteredGoal}
+        />
+        <Button title="Add" onPress={() => props.onAddGoal(enteredGoal)} />
+      </View>
+    </Modal>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  inputContainer: {
+    flexDirection: "column",
+    alignItems: "center",
     padding: 60,
     flex: 1,
-    backgroundColor: "grey",
-    color: "pink"
-    //alignItems: "center",
-    // justifyContent: "center"
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  input: {
+    width: "80%",
+    color: "red",
+    //borderBottomColor: "black",
+    borderWidth: 2,
+    borderColor: "gold",
+    padding: 10
   }
 });
 
