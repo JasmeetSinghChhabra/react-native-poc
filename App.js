@@ -29,14 +29,22 @@ export default function App() {
     });
   };
 
+  const cancelGoaladditionHandler = () => {
+    setIsAddMode(false);
+  };
+
   return (
     <View style={styles.container}>
       <Text>{outputText}</Text>
       <Button title="Click Me" onPress={() => setoutputText("Oh Yes")} />
 
-      <Button title="Add new goal" onPress={()=> setIsAddMode(true)}/>
+      <Button title="Add new goal" onPress={() => setIsAddMode(true)} />
 
-      <GoalInput visible={isAddMode} onAddGoal={addGoalHandler} />
+      <GoalInput
+        visible={isAddMode}
+        onAddGoal={addGoalHandler}
+        onCancel={cancelGoaladditionHandler}
+      />
       <FlatList
         keyExtractor={(item, index) => item.id}
         data={courseGoals}
