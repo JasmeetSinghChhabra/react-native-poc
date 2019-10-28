@@ -7,20 +7,18 @@ import {
   Button,
   TextInput
 } from "react-native";
+import GoalItem from "./components/GoalItem";
+import GoalInput from "./components/GoalInput";
 
 export default function App() {
   const [outputText, setoutputText] = useState("Yo Bitches");
-  const [enteredGoal, setEnteredGoal] = useState(""); //to get input
   const [courseGoals, setCourseGoals] = useState([]);
 
-  const goalInputHandler = input => {
-    setEnteredGoal(input);
-  };
-  const addGoalHandler = () => {
-    console.log(enteredGoal);
+  const addGoalHandler = goalTitle => {
+    //console.log(enteredGoal);
     setCourseGoals(currentGoals => [
       ...currentGoals,
-      { key: Math.random().toString(), value: enteredGoal }
+      { id: Math.random().toString(), value: goalTitle }
     ]); //spread operator
   };
 
@@ -29,39 +27,17 @@ export default function App() {
       <Text>{outputText}</Text>
       <Button title="Click Me" onPress={() => setoutputText("Oh Yes")} />
 
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-evenly",
-          alignItems: "center"
-        }}
-      >
-        <TextInput
-          style={{
-            width: "80%",
-            color: "red",
-            //borderBottomColor: "black",
-            borderWidth: 2,
-            borderColor: "gold",
-            padding: 10
-          }}
-          placeholder="Checking Fucntionality"
-          onChangeText={goalInputHandler}
-          value={enteredGoal}
-        />
-        <Button title="Add" onPress={addGoalHandler} />
-      </View>
-      <View>
-        <FlatList
-          keyExtractor={(item, index) => item.id}
-          data={courseGoals}
-          renderItem={itemData => (
-            <View style={styles.listItem}>
-              <Text>{itemData.item.value}</Text>
-            </View>
-          )}
-        />
-      </View>
+      <GoalInput onAddGoal={addGoalHandler} />
+      <FlatList
+        keyExtractor={(item, index) => item.id}
+        data={courseGoals}
+        renderItem={itemData => (
+          <GoalItem
+            onDelete={() => console.log('Does that work?')}
+            title={itemData.item.value }
+          />
+        )}
+      />
     </View>
   );
 }
@@ -74,14 +50,5 @@ const styles = StyleSheet.create({
     color: "pink"
     //alignItems: "center",
     // justifyContent: "center"
-  },
-  listItem: {
-    padding: 10,
-    backgroundColor: "#ccc",
-    borderColor: "black",
-    borderWidth: 1,
-    marginVertical: 10,
-    margin: 10,
-    color: "pink"
   }
 });
