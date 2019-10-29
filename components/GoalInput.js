@@ -23,7 +23,7 @@ const GoalInput = props => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Checking Fucntionality"
+          placeholder="Add New Note"
           onChangeText={goalInputHandler}
           value={enteredGoal}
         />

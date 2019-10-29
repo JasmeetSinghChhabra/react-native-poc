@@ -34,7 +34,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>{outputText}</Text>
-      <Button title="Click Me" onPress={() => setoutputText("Oh Yes")} />
+      <Button title="Click Me" onPress={() => setoutputText("List can be made: Add Notes.")} />
       <Button title="Add new goal" onPress={() => setIsAddMode(true)} />
 
       <GoalInput
