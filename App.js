@@ -67,6 +67,6 @@ const styles = StyleSheet.create({
     backgroundColor: "grey",
     color: "pink",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "space-around"
   }
 });
