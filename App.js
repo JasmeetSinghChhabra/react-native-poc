@@ -7,63 +7,29 @@ import {
   Button,
   TextInput
 } from "react-native";
-import GoalItem from "./components/GoalItem";
-import GoalInput from "./components/GoalInput";
+import Header from "./components/Header";
+import StartGameScreen from "./screens/StartGameScreen";
+import NotesScreen from "./screens/NotesScreen";
 
-export default function App() {
-  const [outputText, setoutputText] = useState("Notes App");
-  const [courseGoals, setCourseGoals] = useState([]);
-  const [isAddMode, setIsAddMode] = useState(false);
-  const addGoalHandler = goalTitle => {
-    //console.log(enteredGoal);
-    setCourseGoals(currentGoals => [
-      ...currentGoals,
-      { id: Math.random().toString(), value: goalTitle }
-    ]); //spread operator
-    setIsAddMode(false);
-  };
-  const removeGoalHandler = goalId => {
-    setCourseGoals(currentGoals => {
-      return currentGoals.filter(goal => goal.id !== goalId);
-    });
-  };
+const App = props => {
+  const [isNotesMode, setIsNotesMode] = useState(false);
   const cancelGoaladditionHandler = () => {
-    setIsAddMode(false);
+    setIsNotesMode(false);
   };
-
   return (
-    <View style={styles.container}>
-      <Text>{outputText}</Text>
-      <Button title="Click Me" onPress={() => setoutputText("List can be made: Add Notes.")} />
-      <Button title="Add new goal" onPress={() => setIsAddMode(true)} />
-
-      <GoalInput
-        visible={isAddMode}
-        onAddGoal={addGoalHandler}
-        onCancel={cancelGoaladditionHandler}
-      />
-      <FlatList
-        keyExtractor={(item, index) => item.id}
-        data={courseGoals}
-        renderItem={itemData => (
-          <GoalItem
-            id={itemData.item.id}
-            onDelete={removeGoalHandler}
-            title={itemData.item.value}
-          />
-        )}
-      />
+    <View style={styles.screen}>
+      <Header title={"Main Page"} />
+      <StartGameScreen />
+      <NotesScreen visible={isNotesMode} onCancel={cancelGoaladditionHandler} />
+      <Button title="Notes App" onPress={() => setIsNotesMode(true)} />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 60,
-    flex: 1,
-    backgroundColor: "grey",
-    color: "pink",
-    alignItems: "center",
-    justifyContent: "space-around"
+  screen: {
+    flex: 1
   }
 });
+
+export default App;
