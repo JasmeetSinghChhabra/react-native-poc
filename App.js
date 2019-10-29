@@ -11,10 +11,9 @@ import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 export default function App() {
-  const [outputText, setoutputText] = useState("Yo Bitches");
+  const [outputText, setoutputText] = useState("Notes App");
   const [courseGoals, setCourseGoals] = useState([]);
   const [isAddMode, setIsAddMode] = useState(false);
-
   const addGoalHandler = goalTitle => {
     //console.log(enteredGoal);
     setCourseGoals(currentGoals => [
@@ -28,7 +27,6 @@ export default function App() {
       return currentGoals.filter(goal => goal.id !== goalId);
     });
   };
-
   const cancelGoaladditionHandler = () => {
     setIsAddMode(false);
   };
@@ -37,7 +35,6 @@ export default function App() {
     <View style={styles.container}>
       <Text>{outputText}</Text>
       <Button title="Click Me" onPress={() => setoutputText("Oh Yes")} />
-
       <Button title="Add new goal" onPress={() => setIsAddMode(true)} />
 
       <GoalInput
