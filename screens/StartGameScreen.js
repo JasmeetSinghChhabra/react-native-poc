@@ -8,27 +8,22 @@ import {
   TextInput,
   Modal
 } from "react-native";
+import Card from "../components/card";
+import Colors from "../constants/colors";
+import Input from "../components/Input";
 
 const StartGameScreen = props => {
-  //   const [enteredGoal, setEnteredGoal] = useState(""); //to get input
-  //   const goalInputHandler = input => {
-  //     setEnteredGoal(input);
-  //   };
-  //   const addGoalHandler = () => {
-  //     props.onAddGoal(enteredGoal);
-  //     setEnteredGoal("");
-  //   };
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Start a New Game!</Text>
-      <View style={styles.inputContainer}>
+      <Card style={styles.inputContainer}>
         <Text>Select a Number</Text>
-        <TextInput placeholder="Number" />
+        <Input style={styles.Input} />
         <View style={styles.btn}>
-          <Button title="Reset" onPress={() => {}} />
-          <Button title="Confirm" onPress={() => {}} />
+          <Button title="Reset" onPress={() => {}} color={Colors.accent} />
+          <Button title="Confirm" onPress={() => {}} color={Colors.primary} />
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -44,28 +39,23 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
-    paddingHorizontal: 15,
-    margin: 15
+    paddingHorizontal: 15
+    //margin: 15
   },
   title: {
     fontSize: 20,
-    marginVertical: 10,
-    margin: 10
+    marginVertical: 10
+    // margin: 10
   },
   inputContainer: {
     width: 300,
     maxWidth: "80%",
     alignItems: "center",
-    shadowColor: "black",
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    shadowOpacity: 0.26,
-    backgroundColor: "white",
-    padding: 20,
-    elevation: 5,
-    borderRadius: 10,
-    margin: 30,
-    
+    margin: 30
+  },
+  Input: {
+    width: 50,
+    textAlign: "center"
   }
 });
 

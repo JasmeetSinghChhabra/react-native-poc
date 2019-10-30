@@ -69,7 +69,6 @@ const StartGameScreen = props => {
 const styles = StyleSheet.create({
   container: {
     padding: 60,
-    backgroundColor: "grey",
     alignItems: "stretch",
     justifyContent: "space-between",
     flex: 1

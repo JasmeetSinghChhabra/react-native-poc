@@ -10,6 +10,7 @@ import {
 import Header from "./components/Header";
 import StartGameScreen from "./screens/StartGameScreen";
 import NotesScreen from "./screens/NotesScreen";
+import Colors from "./constants/colors";
 
 const App = props => {
   const [isNotesMode, setIsNotesMode] = useState(false);
@@ -21,7 +22,7 @@ const App = props => {
       <Header title={"Main Page"} />
       <StartGameScreen />
       <NotesScreen visible={isNotesMode} onCancel={cancelGoaladditionHandler} />
-      <Button title="Notes App" onPress={() => setIsNotesMode(true)} />
+      <Button title="Notes App" onPress={() => setIsNotesMode(true)} color={Colors.primary}/>
     </View>
   );
 };

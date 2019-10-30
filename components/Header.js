@@ -8,6 +8,7 @@ import {
   TextInput,
   Modal
 } from "react-native";
+import Colors from "../constants/colors";
 
 const Header = props => {
   return (
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 90,
     paddingTop: 30,
-    backgroundColor: "#f7287b",
+    backgroundColor: Colors.primary,
     alignItems: "center",
     //flex: 1,
     justifyContent: "center"
